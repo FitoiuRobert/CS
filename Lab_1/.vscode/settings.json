@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.CPI": "makefile",
+        "patch_svn": "shellscript",
+        "precommit": "shellscript",
+        "common": "shellscript",
+        "cpi_utils": "shellscript",
+        "yocto": "shellscript",
+        "prints": "shellscript",
+        "timers": "shaderlab",
+        "*.pkgfile": "shellscript",
+        "iostream": "cpp"
+    }
+}

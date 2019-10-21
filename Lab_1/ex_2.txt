@@ -1,0 +1,8 @@
+password a1cb2@#!
+hashes to $6$SvT3dVpN$lwb3GViLl0J0ntNk5BAWe2WtkbjSBMXtSkDCtZUkVhVPiz5X37WflWL4k3ZUusdoyh7IOUlSXE1jUHxIrg29p.
+match !!!
+Password  successfuly  recovered:  a1cb2@#!
+
+real    17m12.123s
+user    12m42.375s
+sys     0m29.313s

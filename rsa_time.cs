@@ -41,7 +41,30 @@ namespace ConsoleApplication4
             swatch.Stop();
             Console.WriteLine("Decryption time at " + myKeySize + " bit ... " + ((double)swatch.ElapsedMilliseconds / count).ToString() + " ms");
 
+            swatch.Reset();
+            SHA256Managed myHash = new SHA256Managed();
+            string some_text = "this is an important message";
+            //sign the message
+            byte[] signature = myrsa.SignData(System.Text.Encoding.ASCII.GetBytes(some_text), myHash);
+            swatch.Start();
+            for (int i = 0; i < count; i++)
+            {
+                signature = myrsa.SignData(System.Text.Encoding.ASCII.GetBytes(some_text), myHash);
+            }
+            swatch.Stop();
+            Console.WriteLine("Signing time at " + myKeySize + " bit ... " + ((double)swatch.ElapsedMilliseconds / count).ToString() + " ms");
+
+            swatch.Reset();
+            bool verified;
+            swatch.Start();
+            for (int i = 0; i < count; i++)
+            {
+                verified = myrsa.VerifyData(System.Text.Encoding.ASCII.GetBytes(some_text), myHash, signature);
+            }
+            swatch.Stop();
+            Console.WriteLine("Verification time at " + myKeySize + " bit ... " + ((double)swatch.ElapsedMilliseconds / count).ToString() + " ms");
         }
+
         static void Main(string[] args)
         {
             int op;

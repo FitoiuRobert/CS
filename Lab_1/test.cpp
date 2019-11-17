@@ -16,7 +16,7 @@ string target_pw_hash = "$6$SvT3dVpN$lwb3GViLl0J0ntNk5BAWe2WtkbjSBMXtSkDCtZUkVhV
 char null[] = {'\0'};
 
 // define the maximum length for the password to be searched
-#define MAX_LEN 10
+#define MAX_LEN 8
 
 list<char*> pwlist;
 
@@ -39,14 +39,20 @@ char* exhaustive_search(char* charset, char* salt, char* target){
     int i, current_len;
 
     // begin by adding each character as a potential 1 character password
-    for(i = 0; i<strlen(charset); i++){
-        if( ! isalnum(charset[i]) )
-            continue;
-        new_password = new char[2];
-        new_password[0] = charset[i];
-        new_password[1] = '\0';
-        pwlist.push_back(new_password);
-    }
+    // for(i = 0; i<strlen(charset); i++){
+    //     if( ! isalnum(charset[i]) )
+    //         continue;
+    //     new_password = new char[2];
+    //     new_password[0] = charset[i];
+    //     new_password[1] = '\0';
+    //     pwlist.push_back(new_password);
+    // }
+
+    new_password = new char[3];
+    new_password[0] = 'a';
+    new_password[1] = '1';
+    new_password[2] = '\0';
+    pwlist.push_back(new_password);
 
     while(true){
         // test if queue is not empty and return null if so
@@ -56,8 +62,10 @@ char* exhaustive_search(char* charset, char* salt, char* target){
         current_password = pwlist.front();
         current_len = strlen(current_password);
         //  check  if  current  password  is  the  target  password,  if  yes  return  the current_password
-        if (check_password(current_password, salt, target))
-        return current_password;
+        if(current_len == 8){
+            if (check_password(current_password, salt, target))
+                return current_password;
+        }
         //  else  generates  new  passwords  from  the  current  one  by  appending each character from the charlist
         // only if the current length is less than the maxlength
         if(current_len < MAX_LEN){
